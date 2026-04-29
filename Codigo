@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFit Experience 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #040d1e;
+    --navy2: #0a1a35;
+    --teal: #00e5c0;
+    --teal2: #00b894;
+    --orange: #ff6b35;
+    --white: #f0f4ff;
+    --gray: #8a9bb8;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(0,229,192,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(4,13,30,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.7rem;
+    letter-spacing: 3px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo span {
+    color: var(--teal);
+  }
+
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.6; }
+  }
+
+  nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+    position: relative;
+  }
+
+  nav button:hover {
+    color: var(--white);
+    background: rgba(0,229,192,0.08);
+  }
+
+  nav button.active {
+    color: var(--teal);
+    background: rgba(0,229,192,0.1);
+  }
+
+  nav button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; height: 2px;
+    background: var(--teal);
+    border-radius: 2px;
+  }
+
+  .header-cta {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+  }
+
+  .header-cta:hover {
+    background: #00ffd5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0,229,192,0.35);
+  }
+
+  /* ─── PAGE WRAPPER ─── */
+  .page {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── HERO (INÍCIO) ─── */
+  .hero {
+    min-height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,229,192,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    color: var(--teal);
+    margin-bottom: 32px;
+    background: rgba(0,229,192,0.05);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 .accent { color: var(--teal); }
+  .hero h1 .accent2 { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--gray);
+    max-width: 520px;
+    margin: 24px auto 48px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: #00ffd5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,192,0.3);
+  }
+
+  .btn-outline {
+    background: none;
+    color: var(--white);
+    border: 1px solid rgba(240,244,255,0.2);
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 64px;
+    margin-top: 80px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    color: var(--teal);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  /* ─── SECTION SHARED ─── */
+  .section-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 24px;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    color: var(--gray);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  /* ─── SOBRE ─── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-top: 64px;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+    header { padding: 0 20px; }
+    .hero-stats { gap: 32px; }
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card-main {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card-main::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,229,192,0.15), transparent);
+    border-radius: 50%;
+  }
+
+  .about-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .about-card-main h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: var(--teal);
+  }
+
+  .about-card-main p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .about-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .pill {
+    background: rgba(0,229,192,0.08);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    color: var(--teal);
+  }
+
+  .about-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .about-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .about-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(0,229,192,0.1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .about-item h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .about-item p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ─── PROGRAMAÇÃO ─── */
+  .schedule-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 48px 0 32px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--gray);
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    background: rgba(0,229,192,0.1);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .schedule-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .schedule-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .schedule-item:hover {
+    border-color: rgba(0,229,192,0.4);
+    background: rgba(0,229,192,0.04);
+    transform: translateX(4px);
+  }
+
+  .schedule-time {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    color: var(--teal);
+    letter-spacing: 1px;
+  }
+
+  .schedule-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .schedule-info p {
+    font-size: 0.82rem;
+    color: var(--gray);
+  }
+
+  .schedule-tag {
+    background: rgba(255,107,53,0.12);
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--orange);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .schedule-tag.workshop {
+    background: rgba(0,229,192,0.08);
+    border-color: var(--border);
+    color: var(--teal);
+  }
+
+  .schedule-tag.demo {
+    background: rgba(147,51,234,0.1);
+    border-color: rgba(147,51,234,0.3);
+    color: #a78bfa;
+  }
+
+  /* ─── CONTATO ─── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .schedule-item { grid-template-columns: 1fr; gap: 8px; }
+    .about-grid { gap: 40px; }
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: rgba(0,229,192,0.35);
+  }
+
+  .contact-card-icon {
+    width: 44px; height: 44px;
+    background: rgba(0,229,192,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .contact-card h4 {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-card p {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .contact-form {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+  }
+
+  .contact-form h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+    color: var(--teal);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--teal);
+  }
+
+  .form-group textarea { height: 120px; resize: none; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover {
+    background: #00ffd5;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(0,229,192,0.3);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--gray);
+  }
+
+  .footer-logo span { color: var(--teal); }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    TECH<span>FIT</span>
+  </div>
+
+  <nav>
+    <button class="active" onclick="showPage('inicio', this)">Início</button>
+    <button onclick="showPage('sobre', this)">Sobre</button>
+    <button onclick="showPage('programacao', this)">Programação</button>
+    <button onclick="showPage('contato', this)">Contato</button>
+  </nav>
+
+  <button class="header-cta" onclick="showPage('contato', document.querySelectorAll('nav button')[3])">Inscreva-se</button>
+</header>
+
+<!-- ══════════════════════════════════ INÍCIO ══════════════════════════════════ -->
+<div class="page active" id="page-inicio">
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-badge">São Paulo · 12–14 Set 2026</div>
+    <h1>
+      TECH<span class="accent">FIT</span><br>
+      EXPERI<span class="accent2">ENCE</span>
+    </h1>
+    <p class="hero-sub">O maior evento de tecnologia e saúde da América Latina. Inovação, ciência e performance unidos em três dias inesquecíveis.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="showPage('programacao', document.querySelectorAll('nav button')[2])">Ver Programação</button>
+      <button class="btn-outline" onclick="showPage('sobre', document.querySelectorAll('nav button')[1])">Saiba mais</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">5K+</div>
+        <div class="stat-label">Participantes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">80+</div>
+        <div class="stat-label">Palestrantes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Dias de Evento</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Workshops</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════ SOBRE ══════════════════════════════════ -->
+<div class="page" id="page-sobre">
+  <div class="section-wrapper">
+    <p class="section-tag">// Sobre o evento</p>
+    <h2 class="section-title">ONDE CIÊNCIA<br>ENCONTRA INOVAÇÃO</h2>
+    <p class="section-desc">O TechFit Experience nasceu da crença de que tecnologia e saúde são inseparáveis. Reunimos os maiores nomes do setor para inspirar, conectar e transformar.</p>
+
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-card-main">
+          <div class="about-icon">🏟️</div>
+          <h3>Expo Center Norte</h3>
+          <p>Três pavilhões completamente dedicados à interseção entre tecnologia, saúde e performance. Espaços imersivos, instalações interativas e uma atmosfera única.</p>
+          <div class="about-pills">
+            <span class="pill">São Paulo, SP</span>
+            <span class="pill">12–14 Set 2026</span>
+            <span class="pill">3 Pavilhões</span>
+            <span class="pill">Presencial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-list">
+        <div class="about-item">
+          <div class="about-item-icon">🎯</div>
+          <div>
+            <h4>Nossa Missão</h4>
+            <p>Democratizar o acesso às inovações que transformam saúde e qualidade de vida, reunindo pesquisadores, empreendedores e entusiastas.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-icon">🤝</div>
+          <div>
+            <h4>Networking de Alto Nível</h4>
+            <p>Conecte-se com mais de 5.000 profissionais das áreas de saúde, tecnologia, esporte e bem-estar em um ambiente pensado para gerar conexões reais.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-icon">🔬</div>
+          <div>
+            <h4>Conteúdo de Vanguarda</h4>
+            <p>Palestras, painéis e workshops com os maiores especialistas globais em biohacking, wearables, medicina personalizada e IA aplicada à saúde.</p>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-item-icon">🚀</div>
+          <div>
+            <h4>Área de Startups</h4>
+            <p>O maior hub de healthtechs da América Latina, com mais de 120 empresas expondo soluções inovadoras e buscando parceiros e investidores.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ PROGRAMAÇÃO ══════════════════════════════════ -->
+<div class="page" id="page-programacao">
+  <div class="section-wrapper">
+    <p class="section-tag">// Programação oficial</p>
+    <h2 class="section-title">3 DIAS QUE VÃO<br>MUDAR SUA VISÃO</h2>
+    <p class="section-desc">Uma grade completa com palestras magistrais, workshops práticos e demonstrações ao vivo com as tecnologias mais avançadas do mercado.</p>
+
+    <div class="schedule-tabs">
+      <button class="tab-btn active" onclick="filterDay('dia1', this)">Dia 1 — 12 Set</button>
+      <button class="tab-btn" onclick="filterDay('dia2', this)">Dia 2 — 13 Set</button>
+      <button class="tab-btn" onclick="filterDay('dia3', this)">Dia 3 — 14 Set</button>
+    </div>
+
+    <div class="schedule-grid" id="schedule-dia1">
+      <div class="schedule-item">
+        <div class="schedule-time">09:00</div>
+        <div class="schedule-info">
+          <h4>Abertura Oficial & Keynote: O Futuro da Saúde Conectada</h4>
+          <p>Dr. Renata Souza · Médica e Pesquisadora do MIT</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:00</div>
+        <div class="schedule-info">
+          <h4>Wearables de Nova Geração: Do Monitoramento à Predição</h4>
+          <p>Carlos Henrique Lima · CTO, PulseWave Brasil</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">14:00</div>
+        <div class="schedule-info">
+          <h4>Workshop: Introdução ao Biohacking Seguro</h4>
+          <p>Vagas limitadas · Sala B3 · Material incluso</p>
+        </div>
+        <span class="schedule-tag workshop">Workshop</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">16:30</div>
+        <div class="schedule-info">
+          <h4>Demo Live: Exoesqueletos e Reabilitação com IA</h4>
+          <p>NeuroMov Technologies · Pavilhão Central</p>
+        </div>
+        <span class="schedule-tag demo">Demo</span>
+      </div>
+    </div>
+
+    <div class="schedule-grid" id="schedule-dia2" style="display:none">
+      <div class="schedule-item">
+        <div class="schedule-time">09:30</div>
+        <div class="schedule-info">
+          <h4>IA Diagnóstica: Quando Algoritmos Salvam Vidas</h4>
+          <p>Prof. André Figueiredo · USP & Stanford Medicine</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:30</div>
+        <div class="schedule-info">
+          <h4>Nutrição de Precisão com Genômica</h4>
+          <p>Dra. Isabela Martins · Fundadora, GeneFood</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">14:00</div>
+        <div class="schedule-info">
+          <h4>Workshop: Desenvolvimento de Apps para Saúde Mental</h4>
+          <p>Sala A1 · Certificado de participação incluso</p>
+        </div>
+        <span class="schedule-tag workshop">Workshop</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">16:00</div>
+        <div class="schedule-info">
+          <h4>Painel: Investimentos em Healthtechs no Brasil</h4>
+          <p>Mesa redonda com VCs e fundadores de startups</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">19:00</div>
+        <div class="schedule-info">
+          <h4>TechFit Night — Networking & DJ Set</h4>
+          <p>Evento social exclusivo para participantes credenciados</p>
+        </div>
+        <span class="schedule-tag demo">Especial</span>
+      </div>
+    </div>
+
+    <div class="schedule-grid" id="schedule-dia3" style="display:none">
+      <div class="schedule-item">
+        <div class="schedule-time">09:00</div>
+        <div class="schedule-info">
+          <h4>Longevidade e Performance: O Código do Atleta do Futuro</h4>
+          <p>Coach Marcos Vidal · Consultor olímpico</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:00</div>
+        <div class="schedule-info">
+          <h4>Workshop: Criando Produtos para a Saúde com Design Thinking</h4>
+          <p>Sala C2 · Dinâmica prática em grupo</p>
+        </div>
+        <span class="schedule-tag workshop">Workshop</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">14:00</div>
+        <div class="schedule-info">
+          <h4>Demo Live: Realidade Virtual na Terapia da Dor</h4>
+          <p>MindSpace VR · Experimente ao vivo</p>
+        </div>
+        <span class="schedule-tag demo">Demo</span>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">16:00</div>
+        <div class="schedule-info">
+          <h4>Cerimônia de Encerramento & TechFit Awards 2026</h4>
+          <p>Premiação das melhores startups e inovações do evento</p>
+        </div>
+        <span class="schedule-tag">Palestra</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ CONTATO ══════════════════════════════════ -->
+<div class="page" id="page-contato">
+  <div class="section-wrapper">
+    <p class="section-tag">// Fale conosco</p>
+    <h2 class="section-title">VAMOS<br>CONVERSAR?</h2>
+    <p class="section-desc">Dúvidas sobre inscrições, patrocínios, imprensa ou parcerias? Estamos aqui para ajudar.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-card-icon">📧</div>
+          <div>
+            <h4>Email Geral</h4>
+            <p>contato@techfit2026.com.br</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">🤝</div>
+          <div>
+            <h4>Patrocínios & Parcerias</h4>
+            <p>parcerias@techfit2026.com.br</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📰</div>
+          <div>
+            <h4>Imprensa & Credenciais</h4>
+            <p>imprensa@techfit2026.com.br</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📍</div>
+          <div>
+            <h4>Local do Evento</h4>
+            <p>Expo Center Norte — São Paulo, SP</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📞</div>
+          <div>
+            <h4>Telefone / WhatsApp</h4>
+            <p>(11) 99800-2026</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Envie uma mensagem</h3>
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label>Assunto</label>
+          <input type="text" placeholder="Como podemos ajudar?">
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea placeholder="Descreva sua dúvida ou proposta..."></textarea>
+        </div>
+        <button class="form-submit" onclick="this.textContent='✓ Mensagem enviada!'; this.style.background='#00b894'; setTimeout(()=>{this.textContent='Enviar mensagem'; this.style.background=''}, 3000)">Enviar mensagem</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">TECH<span>FIT</span> EXPERIENCE</div>
+  <p>© 2026 TechFit Experience. Todos os direitos reservados.</p>
+  <p style="font-size:0.75rem; color: #4a5a78;">São Paulo, Brasil</p>
+</footer>
+
+<script>
+  function showPage(pageId, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function filterDay(dayId, btn) {
+    document.querySelectorAll('[id^="schedule-"]').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('schedule-' + dayId).style.display = 'grid';
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
